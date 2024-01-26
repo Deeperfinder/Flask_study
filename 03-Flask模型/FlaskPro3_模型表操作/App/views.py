@@ -136,9 +136,34 @@ def user_get():
 @blue.route('/paginate/')
 def get_paginate():
     # 页码:默认显示第一页
-    page = request.args.get('page', 1)
+    page = int(request.args.get('page', 1))
     # per_page : 每页显示数据量
-    per_page = request.args.get('per_page', 5)
+    per_page = int(request.args.get('per_page', 5))
     print(page, type(page))
     print(per_page, type(per_page))
-    return render_template('paginate.html')
+
+    # paginate()
+    p = User.query.paginate(page=page, per_page=per_page, error_out=False)
+    print(p.items)
+    # paginate 对象的属性
+    #   items: 返回当前页的内容列表
+    #   has_next: 是否还有下一页
+    #   hax_prev: 是否还有上一页
+    #   next(erro_out=False): 返回下一页的Pagination对象
+    #   prev(erro_out=False): 返回上一页的pagination对象
+    #   page: 当前页的页码(从1开始)
+    print(p.page)
+    #   pages: 总页数
+    print(p.pages)
+    #   per_page: 每页显示的数量
+    #   prev_num: 上一页页码数量
+    #   nexxt_num: 下一页页码数
+    #   query: 返回创建该pagination对象的查询对象
+    #   total： 查询返回的记录总数
+    print(p.total)
+
+
+
+
+
+    return render_template('paginate.html', p=p)
