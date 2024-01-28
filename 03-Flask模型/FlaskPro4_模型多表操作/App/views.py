@@ -33,7 +33,7 @@ def add_grade_stu():
 
 @blue.route('/addstu')
 def add_stu():
-    # 添加班级
+    # 添加student
     students = []
     for i in range(10):
         stu = Student()
@@ -87,3 +87,72 @@ def get_stu():
     for stu in grade.students:
         print(stu.name, stu.age, stu.grade_id)
     return 'OK'
+
+
+# ---------多对多-------
+@blue.route('/adduser/')
+def get_user():
+    users = []
+    for i in range(4):
+        user = UserModel()
+        user.name = f'Lucy-{i}'
+        user.age = i
+        users.append(user)
+    try:
+        db.session.add_all(users)
+        db.session.commit()
+    except Exception as e:
+        print('e:', e)
+        db.session.rollback()
+        db.session.flush()
+    return 'OK'
+
+@blue.route('/addmovie/')
+def add_movie():
+    movies = []
+    for i in range(10,14):
+        movie = Movie()
+        movie.name = f'阿凡达-{i}'
+        movie.age = i
+        movies.append(movie)
+    try:
+        db.session.add_all(movies)
+        db.session.commit()
+    except Exception as e:
+        print('e:', e)
+        db.session.rollback()
+        db.session.flush()
+    return 'OK'
+
+@blue.route('/addcollect/')
+def add_collect():
+    # 用户收藏电影
+    user = UserModel.query.get(1)
+    movie = Movie.query.get(1)
+    user.movies.append(movie)
+    db.session.commit()
+    return 'OK'
+
+# 查询操作
+@blue.route('/getcollect/')
+def get_collect():
+    # 查找某一个用户收藏的所有电影
+    user = UserModel.query.get(1)
+    print(user.movies)
+
+    # 查找收藏了某电影的所有用户
+    movie = Movie.query.get(4)
+    print(movie.users)
+    return 'OK'
+
+# 修改：和单表操作一样
+
+# 删除
+@blue.route('/deluser')
+def del_user():
+    # 级联删除
+    user = UserModel.query.get(1)
+    db.session.delete(user)
+    db.session.commit()
+    return 'OK'
+
