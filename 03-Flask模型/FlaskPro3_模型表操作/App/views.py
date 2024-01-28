@@ -157,7 +157,7 @@ def get_paginate():
     print(p.pages)
     #   per_page: 每页显示的数量
     #   prev_num: 上一页页码数量
-    #   nexxt_num: 下一页页码数
+    #   next_num: 下一页页码数
     #   query: 返回创建该pagination对象的查询对象
     #   total： 查询返回的记录总数
     print(p.total)

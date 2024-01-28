@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="flaskdb2@localhost [2]">
+<dataSource name="flaskdb2@localhost">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.51">
     <root id="1">
       <DefaultCasing>exact</DefaultCasing>
@@ -1060,12 +1060,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Charset>utf8mb4</Charset>
     </collation>
     <schema id="288" parent="1" name="flaskdb">
-      <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-01-28.01:55:57</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="flaskdb2">
-      <LastIntrospectionLocalTimestamp>2024-01-28.01:55:38</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-01-28.01:51:22</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="290" parent="1" name="information_schema">
@@ -1102,43 +1100,42 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <user id="298" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="299" parent="288" name="alembic_version">
+    <table id="299" parent="289" name="alembic_version">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="300" parent="288" name="user">
+    <table id="300" parent="289" name="grade">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="301" parent="299" name="version_num">
+    <table id="301" parent="289" name="student">
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_0900_ai_ci</CollationName>
+    </table>
+    <column id="302" parent="299" name="version_num">
       <DasType>varchar(32)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <index id="302" parent="299" name="PRIMARY">
+    <index id="303" parent="299" name="PRIMARY">
       <ColNames>version_num</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="303" parent="299" name="PRIMARY">
+    <key id="304" parent="299" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="304" parent="300" name="id">
-      <AutoIncrement>24</AutoIncrement>
+    <column id="305" parent="300" name="id">
+      <AutoIncrement>11</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="305" parent="300" name="name">
+    <column id="306" parent="300" name="name">
       <DasType>varchar(30)|0s</DasType>
       <Position>2</Position>
-    </column>
-    <column id="306" parent="300" name="age">
-      <DasType>int|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
     </column>
     <index id="307" parent="300" name="PRIMARY">
       <ColNames>id</ColNames>
@@ -1156,6 +1153,51 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <key id="310" parent="300" name="name">
+      <UnderlyingIndexName>name</UnderlyingIndexName>
+    </key>
+    <column id="311" parent="301" name="id">
+      <AutoIncrement>11</AutoIncrement>
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+    </column>
+    <column id="312" parent="301" name="name">
+      <DasType>varchar(30)|0s</DasType>
+      <Position>2</Position>
+    </column>
+    <column id="313" parent="301" name="age">
+      <DasType>int|0s</DasType>
+      <Position>3</Position>
+    </column>
+    <column id="314" parent="301" name="grade_id">
+      <DasType>int|0s</DasType>
+      <Position>4</Position>
+    </column>
+    <foreign-key id="315" parent="301" name="student_ibfk_1">
+      <ColNames>grade_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>grade</RefTableName>
+    </foreign-key>
+    <index id="316" parent="301" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="317" parent="301" name="name">
+      <ColNames>name</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="318" parent="301" name="grade_id">
+      <ColNames>grade_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="319" parent="301" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <key id="320" parent="301" name="name">
       <UnderlyingIndexName>name</UnderlyingIndexName>
     </key>
   </database-model>
